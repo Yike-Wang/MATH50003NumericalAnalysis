@@ -158,6 +158,9 @@ printbits(1/5)
 ## significand has 52 bits. we can either do it by hand or create a string:
 
 function isprime(k) # quick-and-dirty test for prime
+    if k ≤ 1
+        return false
+    end
     for j=1:k-1
         if gcd(k, j) ≠ 1
             return false
@@ -189,8 +192,8 @@ sig = 2.0^(-52) * parse(Int, ret; base=2)
 # its bits.
 
 ## SOLUTION
-## sign is 1, exponent is 00001 and significand is all zeros
-reinterpret(Float16, 0b0000010000000000)
+## sign is + so sign bit is 0, exponent is 00000 and significand is all zeros apart from a 1:
+reinterpret(Float16, 0b0000000000000001) # == nextfloat(Float16(0))
 ## END
 
 # -----
